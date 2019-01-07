@@ -12,9 +12,10 @@
  */
 #ifndef CARAVAN_H
 #define CARAVAN_H
-
+#include <stdlib.h>
 #include "pack_animal.h"
 
+typedef struct _node* Node;
 /**
 * Initialisiert eine Karawane. D. h., dass es alle in der Karawane befindlichen Tiere aus der
 * Karawane entfernt und die Karawane als leer kennzeichnet.
