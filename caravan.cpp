@@ -14,10 +14,10 @@
 #include "general.h"
 #include <stdlib.h>
 
-typedef struct _node{
+struct Node {
   PackAnimal animal;
-  struct _node* next;
-}Node;
+  struct Node* next;
+};
 
 struct CaravanImplementation{
    Node* _head;
@@ -27,6 +27,8 @@ struct CaravanImplementation{
 Caravan new_caravan()
 {
   Caravan caravan = (Caravan)malloc(sizeof(struct CaravanImplementation));
+  caravan->_head = 0;
+  caravan->length = 0;
   return caravan;
 }
 
@@ -42,6 +44,7 @@ void delete_caravan(Caravan caravan)
   while(curr != 0){
 
     Node* to_be_deleted = curr;
+    curr = curr->next;
     sfree(to_be_deleted);
   }
   sfree(caravan);
@@ -54,14 +57,15 @@ void add_pack_animal(Caravan caravan, PackAnimal animal)
     newNode->animal = animal;
     if (caravan->_head != 0) {
       newNode->next = caravan->_head;
-      caravan->_head->next = newNode;
     }
+    caravan->_head = newNode;
+    caravan->length++;
+    add_to_caravan(animal, caravan);
   }
 }
 
 void remove_pack_animal(Caravan caravan, PackAnimal animal)
 {
-  delete_animal(animal);
 }
 
 int get_caravan_load(Caravan caravan)
